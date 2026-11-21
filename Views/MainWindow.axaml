@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GestorTareas.Views.MainWindow"
+        Title="Gestor de Tareas"
+        Width="960" Height="580"
+        MinWidth="820" MinHeight="520"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid ColumnDefinitions="330,*" RowDefinitions="*,Auto" Margin="16">
+
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="6" Margin="0,0,16,0">
+            <TextBlock Text="Datos de la tarea" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,6" />
+
+            <TextBlock Text="Título" />
+            <TextBox Name="TxtTitulo" MaxLength="80" Watermark="Ej: Estudiar para el parcial" />
+
+            <TextBlock Text="Descripción (opcional)" Margin="0,6,0,0" />
+            <TextBox Name="TxtDescripcion" MaxLength="300" AcceptsReturn="True"
+                     TextWrapping="Wrap" Height="80" />
+
+            <TextBlock Text="Prioridad" Margin="0,6,0,0" />
+            <ComboBox Name="CmbPrioridad" HorizontalAlignment="Stretch" />
+
+            <TextBlock Text="Estado" Margin="0,6,0,0" />
+            <ComboBox Name="CmbEstado" HorizontalAlignment="Stretch" />
+
+            <TextBlock Text="Fecha límite" Margin="0,6,0,0" />
+            <DatePicker Name="DpFecha" HorizontalAlignment="Stretch" />
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Margin="0,14,0,0">
+                <Button Name="BtnGuardar" Grid.Row="0" Grid.Column="0" Content="Guardar nueva"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Margin="0,0,4,4" Click="BtnGuardar_Click" />
+                <Button Name="BtnActualizar" Grid.Row="0" Grid.Column="1" Content="Actualizar"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Margin="4,0,0,4" IsEnabled="False" Click="BtnActualizar_Click" />
+                <Button Name="BtnEliminar" Grid.Row="1" Grid.Column="0" Content="Eliminar"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Margin="0,4,4,0" IsEnabled="False" Click="BtnEliminar_Click" />
+                <Button Name="BtnLimpiar" Grid.Row="1" Grid.Column="1" Content="Limpiar"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Margin="4,4,0,0" Click="BtnLimpiar_Click" />
+            </Grid>
+        </StackPanel>
+
+        
+        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="Auto,Auto,*">
+            <TextBlock Grid.Row="0" Text="Mis tareas" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,6" />
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,90,110,150" Margin="12,0,12,4">
+                <TextBlock Grid.Column="0" Text="Título" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="1" Text="Prioridad" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="2" Text="Estado" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="3" Text="Fecha límite" FontWeight="SemiBold" />
+            </Grid>
+
+            <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="4">
+                <ListBox Name="LstTareas" SelectionChanged="LstTareas_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,90,110,150">
+                                <TextBlock Grid.Column="0" Text="{Binding Titulo}"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Grid.Column="1" Text="{Binding Prioridad}" />
+                                <TextBlock Grid.Column="2" Text="{Binding Estado}" />
+                                <TextBlock Grid.Column="3" Text="{Binding FechaTexto}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" Margin="0,12,0,0">
+            <TextBlock Name="TxtMensaje" Grid.Column="0" TextWrapping="Wrap" FontWeight="SemiBold" />
+            <TextBlock Name="TxtContador" Grid.Column="1" />
+        </Grid>
+
+    </Grid>
+</Window>
